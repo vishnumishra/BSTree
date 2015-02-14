@@ -86,3 +86,25 @@ Node * delete(BSTree *t, int data){
 	deleteNode(t->root,data);
 	return result;
 };
+
+void inOrder (Node* root,travFun fun){
+	if(root == NULL) return;
+	inOrder( root->left,fun );
+	fun(root->data);
+	inOrder( root->right,fun ); 
+}
+
+void postOrder (Node* root,travFun fun){
+	if(root == NULL) return;
+	postOrder( root->right,fun );
+	fun(root->data);
+	postOrder( root->left,fun ); 
+}
+
+void traverse(BSTree *t, travFun fun){
+	printf("====inOrder Traverse==========\n");
+	inOrder(t->root,fun); 
+	printf("\n====postOrder Traverse==========\n");
+	postOrder(t->root,fun); 
+};
+

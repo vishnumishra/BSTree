@@ -179,6 +179,21 @@ void test_delete_delete_the_data_from_the_tree_04(){
 	free(t);
 }
 
+void print_element(int element) {
+	printf("%d\t", element);
+}
+
+void test_travsre_print_the_node_by_inorder(){
+	BSTree *t = malloc(sizeof(BSTree));
+	Node *n;
+	int data[]={15,11,20,5,13,17,25,16,18,22,30},i;
+	*t = createBSTree();
+	for(i=0;i<11;i++){
+		insert(t,data[i]);
+	}
+	traverse(t,print_element);
+	free(t);
+}
 
 
 
