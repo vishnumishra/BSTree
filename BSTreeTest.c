@@ -129,5 +129,64 @@ void test_find_find_the_data_in_a_tree_3(){
 	free(tree);
 }
 
+void test_delete_delete_the_data_from_the_tree_01(){
+	BSTree *tree = malloc(sizeof(BSTree));
+	Node *n;
+	*tree = createBSTree();
+	insert(tree,11);insert(tree,5);insert(tree,20);insert(tree,15);insert(tree,22);
+	n = delete(tree,20);
+	assert(n->right==NULL);
+	free(tree);
+}
+void test_delete_delete_the_data_from_the_tree_02(){
+	BSTree *tree = malloc(sizeof(BSTree));
+	Node *n;
+	*tree = createBSTree();
+	insert(tree,11);insert(tree,5);insert(tree,20);insert(tree,15);insert(tree,22);
+	n = delete(tree,20);
+	assertEqual(tree->root->right->data, 22);
+	assertEqual(tree->root->right->left->data, 15);
+	free(tree);
+}
+
+void test_delete_delete_the_data_from_the_tree_03(){
+	BSTree *t = malloc(sizeof(BSTree));
+	Node *n;
+	int data[]={15,11,20,5,13,17,25,16,18,22,30},i;
+	*t = createBSTree();
+	for(i=0;i<11;i++){
+		insert(t,data[i]);
+	}
+	n = delete(t,20);
+	assertEqual(t->root->right->data,22 );
+	assertEqual(t->root->right->left->data, 17);
+	assertEqual(t->root->right->right->data, 25);
+	assertEqual(t->root->right->right->right->data, 30);
+	free(t);
+}
+
+void test_delete_delete_the_data_from_the_tree_04(){
+	BSTree *t = malloc(sizeof(BSTree));
+	Node *n;
+	int data[]={15,11,20,5,13,17,25,16,18,22,30},i;
+	*t = createBSTree();
+	for(i=0;i<11;i++){
+		insert(t,data[i]);
+	}
+	n = delete(t,20);
+	assertEqual(t->root->right->left->left->data, 16);
+	assertEqual(t->root->right->left->right->data, 18);
+	free(t);
+}
+
+
+
+
+
+
+
+
+
+
 
 

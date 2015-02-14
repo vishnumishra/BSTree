@@ -14,6 +14,8 @@ Node* createNode(int data);
 int insert(BSTree *, int);
 Node* intsertIntoNode(Node* root,int data);
 Node * find(BSTree, int);
+// Node * delete(BSTree *, int);
+Node* delete(BSTree *,int);
 
 
 

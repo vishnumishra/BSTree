@@ -51,5 +51,38 @@ Node * find(BSTree t, int data){
 	return findInNode(t.root,data);
 };
 
+Node* FindMin(Node* root){
+	while(root->left != NULL) root = root->left;
+	return root;
+};
 
 
+Node* deleteNode(Node* root,int data){
+	Node* temp,*result;
+	if(root == NULL) return root;
+	else if(data < root->data ) root->left = deleteNode(root->left,data);
+	else if(data > root->data ) root->right = deleteNode(root->right,data);
+	else{
+		if(root->left == NULL && root->right != NULL){
+			root = NULL;
+		}
+		else if(root->left == NULL){
+			root = root->right;
+		}
+		else if(root->right == NULL){
+			root = root->left;
+		}
+		else { 
+			temp = FindMin(root->right);
+			root->data = temp->data;
+			root->right = deleteNode(root->right,temp->data);
+		}
+	};
+	return root;
+};
+
+Node * delete(BSTree *t, int data){
+	Node* result =  find(*t,data);
+	deleteNode(t->root,data);
+	return result;
+};
