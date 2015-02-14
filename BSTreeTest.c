@@ -128,6 +128,16 @@ void test_find_find_the_data_in_a_tree_3(){
 	assert(n->right == 0);
 	free(tree);
 }
+void test_delete_delete_the_data_from_the_tree_00(){
+	BSTree *tree = malloc(sizeof(BSTree));
+	Node *n;
+	*tree = createBSTree();
+	insert(tree,11);insert(tree,5);insert(tree,20);insert(tree,15);insert(tree,22);
+	n = delete(tree,22);
+	assert(tree->root->right->right == NULL);
+	assertEqual(n->data,22);
+	free(tree);
+}
 
 void test_delete_delete_the_data_from_the_tree_01(){
 	BSTree *tree = malloc(sizeof(BSTree));
@@ -183,7 +193,7 @@ void print_element(int element) {
 	printf("%d\t", element);
 }
 
-void test_travsre_print_the_node_by_inorder(){
+void test_travsre_print_the_node_by_inorder_01(){
 	BSTree *t = malloc(sizeof(BSTree));
 	Node *n;
 	int data[]={15,11,20,5,13,17,25,16,18,22,30},i;
@@ -195,8 +205,46 @@ void test_travsre_print_the_node_by_inorder(){
 	free(t);
 }
 
+void test_travsre_print_the_node_by_inorder_02(){
+	BSTree *t = malloc(sizeof(BSTree));
+	Node *n;
+	int data[]={15,11,20,5,13,17,25,16,18,22,30},i;
+	*t = createBSTree();
+	for(i=0;i<11;i++){
+		insert(t,data[i]);
+	}
+	traverse(t,print_element);
+	delete(t,data[5]);
+	printf("\n\n==================after Deletion of %d ================",data[5] );
+	traverse(t,print_element);
+	free(t);
+}
 
+void test_delete_should_return_NULL_if_there_is_no_node_in_tree(){
+int data = 10;
+BSTree bst =createBSTree();
+assert(delete(&bst, data) == NULL);
+}
 
+void test_delete_should_return_node_and_reset_subtree_if_node_with_two_children_is_deleted(){
+int key[8] = {12,8,14,6,9,13,15,16}, i;
+Node* node;
+BSTree bst = createBSTree();
+for (i = 0; i < 8; i++)
+insert(&bst, key[i]);
+node = delete(&bst, 15);
+assertEqual(node->data,15);
+}
+
+void test_delete_should_return_node_if_leaf_node_is_deleted_in_tree(){
+int key[8] = {12,8,14,6,9,13,15,16}, i;
+Node* node;
+BSTree bst = createBSTree();
+for (i = 0; i < 8; i++)
+insert(&bst, key[i]);
+node = delete(&bst, 16);
+assertEqual(node->data,16);
+}
 
 
 
